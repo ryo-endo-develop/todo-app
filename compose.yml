@@ -1,0 +1,41 @@
+services:
+  backend:
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+  frontend:
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    volumes:
+      - frontend_modules:/app/node_modules # node_modulesディレクトリをホストには保存しない設定
+      - ./frontend:/app
+    ports:
+      - 3011:3000 # 起動するポート番号を変更するため
+    environment:
+      - WATCHPACK_POLLING=true # ホットモジュールリロードをするため
+    env_file:
+      - ./frontend/.env # frontendフォルダの配下でenvファイルを使用するため
+  db:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    platform: linux/amd64
+    container_name: mysql-container
+    expose:
+      - “3306”
+    env_file:
+      - .env
+    volumes:
+      - ./db/conf:/etc/mysql/conf.d
+      - ./db/init:/docker-entrypoint-initdb.d
+
+volumes:
+  db-store:
+  frontend_modules: # frontend_modules ボリュームを定義
