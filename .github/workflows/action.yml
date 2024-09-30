@@ -4,4 +4,4 @@ on:
 
 jobs:
   call-frontend-workflow:
-    uses: ./.github/workflows/frontend-workflow.yml
+    uses: ./.github/workflows/frontend-action.yml
