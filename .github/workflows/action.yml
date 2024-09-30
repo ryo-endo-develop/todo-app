@@ -10,10 +10,5 @@ on:
       - main
 
 jobs:
-  call-frontend-workflow-pr:
-    if: github.event_name == 'pull_request'
-    uses: ./frontend/.github/workflows/frontend-action.yml@${{ github.head_ref }}
-
-  call-frontend-workflow-push:
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-    uses: ./frontend/.github/workflows/frontend-action.yml@${{ github.ref_name }}
+  call-frontend-workflow:
+    uses: ./frontend/.github/workflows/frontend-action.yml@main
