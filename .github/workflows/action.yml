@@ -1,0 +1,7 @@
+name: Frontend Workflow
+on:
+  workflow_dispatch:
+
+jobs:
+  call-frontend-workflow:
+    uses: ./.github/workflows/frontend-workflow.yml
