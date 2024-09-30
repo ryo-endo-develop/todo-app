@@ -20,7 +20,14 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "run-p --continue-on-error --print-label lint:*",
+    "lint:secretlint": "secretlint --maskSecrets --secretlintignore .gitignore '**/*'",
+    "lint:prettier": "prettier --cache --check .",
+    "lint:eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "fix": "run-s --continue-on-error fix:*",
+    "fix:prettier": "prettier --cache --write .",
+    "fix:eslint": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +46,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@secretlint/secretlint-rule-preset-recommend": "^8.2.4",
+    "@typescript-eslint/eslint-plugin": "^8.7.0",
+    "@typescript-eslint/parser": "^8.7.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-redos": "^4.4.5",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "npm-run-all2": "^6.2.3",
+    "prettier": "^3.3.3",
+    "secretlint": "^8.2.4"
   }
 }
