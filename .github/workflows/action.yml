@@ -10,5 +10,27 @@ on:
       - main
 
 jobs:
-  call-frontend-workflow:
-    uses: ./frontend/.github/workflows/frontend-action.yml@main
+  build-lint:
+    name: Build and Lint
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout the source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Lint
+        run: npm run lint
