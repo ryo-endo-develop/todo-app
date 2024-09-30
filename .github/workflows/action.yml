@@ -11,4 +11,4 @@ on:
 
 jobs:
   call-frontend-workflow:
-    uses: ./frontend/.github/workflows/frontend-action.yml
+    uses: ./frontend/.github/workflows/frontend-action.yml@${{ github.head_ref || github.ref_name }}
