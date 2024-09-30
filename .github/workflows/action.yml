@@ -1,7 +1,14 @@
 name: Frontend Workflow
 on:
   workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+  push:
+    branches:
+      - main
 
 jobs:
   call-frontend-workflow:
-    uses: ./.github/workflows/frontend-action.yml
+    uses: ./frontend/.github/workflows/frontend-action.yml
